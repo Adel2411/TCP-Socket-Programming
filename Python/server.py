@@ -24,13 +24,16 @@ def main():
         # Receive the data from the client
         data = client.recv(1024).decode()
         if not data or data.lower() == "end":
-            print("Connection is closed by the client")
+            print("Connection closed by the client")
             break
         print(f"Client: {data}")
 
         # Send a reply to the client
         reply = input("Server (type your message): ")
         client.send(reply.encode("utf-8"))
+        if reply.lower() == "end":
+            print("Connection closed by the server")
+            break
 
     # Close the connection
     client.close()
