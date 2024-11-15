@@ -38,11 +38,11 @@ int main(void)
   // Listening for incoming connections
   if (listen(server_fd, 3) < 0)
   {
-    perror("listen");
+    perror("listen failed");
     close(server_fd);
     exit(EXIT_FAILURE);
   }
-  printf("Server is linstening onn port %d...", PORT);
+  printf("Server is listening on port %d...\n", PORT);
   
   // Accept client connections
   if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t *)&addrlen)) < 0)
@@ -66,5 +66,3 @@ int main(void)
 
   return EXIT_SUCCESS;
 }
-
-
