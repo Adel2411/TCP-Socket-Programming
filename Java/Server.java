@@ -9,11 +9,11 @@ public class Server {
 
       // Create a server socket
       ServerSocket serverSocket = new ServerSocket(port);
-      System.out.println("Server started at port " + port + " ...");
+      System.out.println("Server started at port " + port + "...");
 
       // Wait for client
       Socket clientSocket = serverSocket.accept();
-      System.out.println("Client connected ...");
+      System.out.println("Client connected !");
 
       // Set up input and output streams
       BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
