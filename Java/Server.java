@@ -19,12 +19,19 @@ public class Server {
       BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
       PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 
-      // Read data from client
-      String data = in.readLine();
-      System.out.println("Client : " + data);
+      String clientMessage;
+      while ((clientMessage = in.readLine()) != null) {
+        System.out.println("Client : " + clientMessage);
 
-      // Send data to client
-      out.println("Hello from server");
+        // Stop communication when client sends "end"
+        if (clientMessage.equals("end")) {
+          System.out.println("Client closed the connection !");
+          break;
+        }
+
+        // Send data to client
+        out.println("Server : " + clientMessage.toUpperCase());
+      }
 
       // Close the connection
       in.close();

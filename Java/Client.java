@@ -14,13 +14,25 @@ public class Client {
       // Create a buffered reader to read from the input stream
       BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
       PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+      BufferedReader userIn = new BufferedReader(new InputStreamReader(System.in));
 
-      // Send a message to the server
-      out.println("Hello, server!");
+      String userMessage;
+      String serverResponse;
+      while (true) {
+        System.out.print("Type your message : ");
+        userMessage = userIn.readLine();
+        out.println(userMessage); // Send message to the server
 
-      // Read the server's response
-      String response = in.readLine();
-      System.out.println("Server : " + response);
+        // Stop communication if "end" is sent
+        if (userMessage.equals("end")) {
+          System.out.println("Connection closed by the client");
+          break;
+        }
+
+        // Read response from the server
+        serverResponse = in.readLine();
+        System.out.println(serverResponse);
+      }
 
       // Close the socket
       in.close();
