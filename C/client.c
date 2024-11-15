@@ -5,7 +5,7 @@
 #include <arpa/inet.h>
 
 #define PORT 8080
-#define BUFFER_SIZE 1024
+#define MAXLINE 1024
 #define LOCALHOST "127.0.0.1"
 
 
@@ -14,7 +14,7 @@ int main(void)
   int sock = 0;
   struct sockaddr_in serv_addr;
   char *message = "Hello from client";
-  char buffer[BUFFER_SIZE] = {0};
+  char buffer[MAXLINE] = {0};
 
   // Creating the socket
   if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
@@ -41,13 +41,37 @@ int main(void)
     return EXIT_FAILURE;
   }
 
-  // Sending the message to the server
-  send(sock, message, strlen(message), 0);
-  printf("Message sent to the server\n");
-  
-  // Receiving the message from the server
-  read(sock, buffer, BUFFER_SIZE);
-  printf("Message received from the server: %s\n", buffer);
+  // Communication loop
+  while (1) {
+    // Send a message to the server
+    printf("Client (message to send) : ");
+    fgets(buffer, MAXLINE, stdin);
+    buffer[strcspn(buffer, "\n")] = 0;  // Remove newline character
+    send(sock, buffer, strlen(buffer), 0);
+
+    // Check if the message is 'end'
+    if (strcmp(buffer, "end") == 0) {
+      printf("Connection closed by the client\n");
+      break;
+    }
+
+    // Receive a message from the server
+    memset(buffer, 0, MAXLINE);
+    int bytes_read = read(sock, buffer, MAXLINE);
+    if (bytes_read == 0) {
+      printf("Connection closed by the server\n");
+      break;
+    }
+    printf("Server (received message) : %s\n", buffer);
+
+    // Check if the message is 'end'
+    if (strcmp(buffer, "end") == 0) {
+      printf("Connection closed by the server\n");
+      break;
+    }
+
+  }
+
 
   // Closing the socket
   close(sock);

@@ -52,13 +52,35 @@ int main(void)
     exit(EXIT_FAILURE);
   }
 
-  // Read the message from client and copy it to buffer
-  read(new_socket, buffer, MAXLINE);
-  printf("Client: %s\n", buffer);
+// Communication loop
+  while (1) {
+    // Receive message from client
+    memset(buffer, 0, MAXLINE);
+    int bytes_read = read(new_socket, buffer, MAXLINE);
+    if (bytes_read == 0) {
+      printf("Client disconnected\n");
+      break;
+    }
+    printf("Client: %s\n", buffer);
 
-  // Send the message back to client
-  send(new_socket, hello, strlen(hello), 0);
-  printf("Hello message sent\n");
+    // Check if the message is "end"
+    if (strcmp(buffer, "end") == 0) {
+      printf("Connection closed by the client\n");
+      break;
+    }
+
+    // Send message to client
+    printf("Server (message to send) : ");
+    fgets(buffer, MAXLINE, stdin);
+    buffer[strlen(buffer) - 1] = '\0';  // Remove newline character
+    send(new_socket, buffer, strlen(buffer), 0);
+
+    // Check if the message is "end"
+    if (strcmp(buffer, "end") == 0) {
+      printf("Connection closed by the server\n");
+      break;
+    }
+  }
 
   // Close sockets
   close(new_socket);
