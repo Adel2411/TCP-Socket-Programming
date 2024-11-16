@@ -4,6 +4,14 @@ This repository contains examples of **TCP socket programming** in different pro
 
 The goal is to demonstrate the basic steps and concepts of establishing a TCP connection between a server and a client, handling communication, and closing the connection, using simple, minimal code examples across various programming languages.
 
+## Objective
+
+The main aim of this repository is to provide clear and simple implementations of **TCP client-server communication** in different programming languages, so that you can:
+
+- Understand how TCP sockets work.
+- Learn how to establish connections, send/receive messages, and terminate the connection.
+- Gain insights into how different languages handle socket programming.
+
 ## How Sockets Work
 
 A **socket** is an endpoint for sending or receiving data across a computer network. It provides a way for programs to communicate with each other over a network. Here's a brief overview of how sockets work in the context of **TCP client-server communication**:
@@ -51,14 +59,6 @@ A **socket** is an endpoint for sending or receiving data across a computer netw
   - Connects to the server using the server's IP and port.
   - Sends and receives data.
   - Closes the connection when done.
-
-## Objective
-
-The main aim of this repository is to provide clear and simple implementations of **TCP client-server communication** in different programming languages, so that you can:
-
-- Understand how TCP sockets work.
-- Learn how to establish connections, send/receive messages, and terminate the connection.
-- Gain insights into how different languages handle socket programming.
 
 ## How to Use
 
