@@ -1,36 +1,47 @@
 import * as net from "net";
+import * as readline from "readline";
 
-const PORT = 8080;
+// Create a readline interface to take input from the server's terminal
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
 
-// Create the TCP server
 const server = net.createServer((socket) => {
-  console.log("Client connected");
+  console.log("Client connected.");
 
-  // Handle incoming data
   socket.on("data", (data) => {
-    console.log(`Client: ${data.toString()}`);
+    const message = data.toString();
+    console.log("Client :", message);
 
-    if (data.toString().trim().toLowerCase() === "end") {
-      console.log("Client disconnected");
-      socket.end("Goodbye!\n");
-    } else {
-      const serverResponse = data.toString().toUpperCase();
-      socket.write(`Server: ${serverResponse}`);
+    // If the message is 'end', close the connection
+    if (message.trim().toLowerCase() === "end") {
+      console.log("Ending conversation.");
+      socket.end();
+      rl.close();
+      return;
     }
+
+    // Server responds to the client
+    rl.question("Server (Type Message) : ", (answer) => {
+      if (answer.trim().toLowerCase() === "end") {
+        console.log("Ending conversation.");
+        socket.write("end");
+        socket.end();
+        rl.close();
+        return;
+      }
+
+      socket.write(answer);
+    });
   });
 
-  // Handle client disconnection
   socket.on("end", () => {
-    console.log("Client disconnected");
-  });
-
-  // Handle client errors
-  socket.on("error", (err) => {
-    console.error(err);
+    console.log("Client disconnected.");
   });
 });
 
-// Listening for incoming connections
-server.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+// Listen for incoming connections on port 8080
+server.listen(8080, () => {
+  console.log("Server listening on port 8080");
 });
