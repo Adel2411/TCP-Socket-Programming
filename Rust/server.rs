@@ -33,7 +33,8 @@ fn main() -> std::io::Result<()> {
         }
 
         // Echo the data back to the client
-        stream.write_all(message.as_bytes())?;
+        let server_response = message.trim().to_uppercase();
+        stream.write_all(server_response.as_bytes())?;
     }
 
     // Close the connection
