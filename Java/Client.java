@@ -17,9 +17,9 @@ public class Client {
       BufferedReader userIn = new BufferedReader(new InputStreamReader(System.in));
 
       String userMessage;
-      String serverResponse;
+      String serverMessage;
       while (true) {
-        System.out.print("Type your message : ");
+        System.out.print("Client (Type your message) : ");
         userMessage = userIn.readLine();
         out.println(userMessage); // Send message to the server
 
@@ -30,8 +30,12 @@ public class Client {
         }
 
         // Read response from the server
-        serverResponse = in.readLine();
-        System.out.println(serverResponse);
+        serverMessage = in.readLine();
+        if (serverMessage.equals("end")) {
+          System.out.println("Connection closed by the server");
+          break;
+        }
+        System.out.println("Server : " + serverMessage);
       }
 
       // Close the socket
