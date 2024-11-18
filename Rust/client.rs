@@ -17,7 +17,7 @@ fn main() -> std::io::Result<()> {
     // Communication loop
     loop {
         // Read user input
-        print!("Client (Type message): ");
+        print!("Client (Type your message): ");
         std::io::stdout().flush().unwrap(); // Flush the buffer to make sure the message is printed
         let mut input = String::new();
         std::io::stdin().read_line(&mut input)?;
@@ -32,7 +32,12 @@ fn main() -> std::io::Result<()> {
 
         // Read server response
         let bytes_read = stream.read(&mut buffer)?;
-        println!("Server: {}", String::from_utf8_lossy(&buffer[..bytes_read]));
+        let server_mesage = String::from_utf8_lossy(&buffer[..bytes_read]);
+        if server_mesage.trim().to_lowercase() == "end" {
+            println!("Server closed the connection!");
+            break;
+        }
+        println!("Server: {}", server_mesage);
     }
 
     // Close the connection
