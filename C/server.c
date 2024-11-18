@@ -15,7 +15,6 @@ int main(void)
   struct sockaddr_in address;
   int addrlen = sizeof(address);
   char buffer[MAXLINE] = {0};
-  char *hello = "Hello from server";
 
   // Creating the socket file descriptor
   if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0)
@@ -51,6 +50,7 @@ int main(void)
     close(server_fd);
     exit(EXIT_FAILURE);
   }
+  printf("Client connected\n");
 
 // Communication loop
   while (1) {
@@ -70,7 +70,7 @@ int main(void)
     }
 
     // Send message to client
-    printf("Server (message to send) : ");
+    printf("Server (Type your message) : ");
     fgets(buffer, MAXLINE, stdin);
     buffer[strlen(buffer) - 1] = '\0';  // Remove newline character
     send(new_socket, buffer, strlen(buffer), 0);

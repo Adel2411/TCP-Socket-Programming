@@ -29,7 +29,7 @@ def main():
         print(f"Client: {data}")
 
         # Send a reply to the client
-        reply = input("Server (type your message): ")
+        reply = input("Server (Type your message): ")
         client.send(reply.encode("utf-8"))
         if reply.lower() == "end":
             print("Connection closed by the server")

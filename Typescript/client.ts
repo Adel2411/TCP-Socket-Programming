@@ -12,7 +12,7 @@ const client = new net.Socket();
 // Connect to the server at localhost:8080
 client.connect(8080, "127.0.0.1", () => {
   console.log("Connected to the server.");
-  rl.question("Client (Type message) : ", (message) => {
+  rl.question("Client (Type your message) : ", (message) => {
     // Send the initial message from the client
     client.write(message);
   });

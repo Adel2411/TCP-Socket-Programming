@@ -44,7 +44,7 @@ int main(void)
   // Communication loop
   while (1) {
     // Send a message to the server
-    printf("Client (message to send) : ");
+    printf("Client (Type your message) : ");
     fgets(buffer, MAXLINE, stdin);
     buffer[strcspn(buffer, "\n")] = 0;  // Remove newline character
     send(sock, buffer, strlen(buffer), 0);
@@ -62,7 +62,7 @@ int main(void)
       printf("Connection closed by the server\n");
       break;
     }
-    printf("Server (received message) : %s\n", buffer);
+    printf("Server : %s\n", buffer);
 
     // Check if the message is 'end'
     if (strcmp(buffer, "end") == 0) {

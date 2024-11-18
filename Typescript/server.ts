@@ -23,7 +23,7 @@ const server = net.createServer((socket) => {
     }
 
     // Server responds to the client
-    rl.question("Server (Type Message) : ", (answer) => {
+    rl.question("Server (Type you message) : ", (answer) => {
       if (answer.trim().toLowerCase() === "end") {
         console.log("Ending conversation.");
         socket.write("end");

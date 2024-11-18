@@ -14,7 +14,7 @@ def main():
 
     while True:
         # Send message to the server
-        message = input("Client (type your message): ")
+        message = input("Client (Type your message): ")
         client.send(message.encode("utf-8"))
         if message.lower() == "end":
             print("Connection closed by the client.")
