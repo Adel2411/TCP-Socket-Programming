@@ -65,8 +65,8 @@ A **socket** is an endpoint for sending or receiving data across a computer netw
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/socket-programming-examples.git
-   cd socket-programming-examples
+   git clone https://github.com/Adel2411/TCP-Socket-Programming.git
+   cd TCP-Socket-Programming
    ```
 
 2. Navigate to the directory of the programming language you are interested in.
