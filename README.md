@@ -72,6 +72,10 @@ A **socket** is an endpoint for sending or receiving data across a computer netw
 2. Navigate to the directory of the programming language you are interested in.
 3. Follow the instructions in the README file of that language to run the client and server programs.
 
+## Contribution
+
+We welcome contributions! If you'd like to contribute to this project, please check out the [CONTRIBUTION.md](https://github.com/Adel2411/TCP-Socket-Programming/blob/main/CONTRIBUTION.md) file for detailed guidelines on how to get started.
+
 ## Project Structure
 
 ```plaintext
