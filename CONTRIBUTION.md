@@ -27,7 +27,7 @@ If you'd like to contribute in other ways, you can:
 2. Clone your forked repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/TCP-Socket-Programming.git
+   git clone https://github.com/Adel2411/TCP-Socket-Programming.git
    cd TCP-Socket-Programming
    ```
 
